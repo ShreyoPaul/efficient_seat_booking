@@ -14,7 +14,7 @@ const reserveSeatsHandler = async (req, res) => {
       order: [['rownumber', 'ASC'], ['seatnumber', 'ASC']],
     });
 
-
+console.log('seats', seats);
 
     // If not enough seats are available
     if (seats.length < numOfSeats) {
@@ -26,7 +26,6 @@ const reserveSeatsHandler = async (req, res) => {
     // Try booking seats in the same row
     for (let row = 1; row <= rowCount; row++) {
       const rowSeats = seats.filter(seat => seat.rownumber === row.toString());
-      console.log(rowSeats);
       if (rowSeats.length >= numOfSeats) {
         const seatsToBook = rowSeats.slice(0, numOfSeats);
         const seatIds = seatsToBook.map(seat => seat.id);
@@ -44,8 +43,10 @@ const reserveSeatsHandler = async (req, res) => {
    
     // Book seats in nearby rows if not available in the same row
     const rowSeatCounts = Array.from({ length: rowCount }, (_, i) =>
-      seats.filter(seat => seat.rownumber === i + 1).length
+      seats.filter(seat => seat.rownumber === ((i + 1).toString())).length
     );
+
+    console.log('rowSeatCounts', rowSeatCounts);
 
     let minLength = Infinity;
     let start = 0, end = 0, sum = 0, minStart = -1, minEnd = -1;
@@ -67,10 +68,13 @@ const reserveSeatsHandler = async (req, res) => {
       end++;
     }
 
+    console.log('minStart', minStart);
+    console.log('minEnd', minEnd);
+
 
     const seatsToBook = [];
     for (let i = minStart + 1; i <= minEnd + 1; i++) {
-      const rowSeats = seats.filter(seat => seat.rownumber === i);
+      const rowSeats = seats.filter(seat => seat.rownumber === i.toString());
       seatsToBook.push(...rowSeats);
     }
 
@@ -82,6 +86,8 @@ const reserveSeatsHandler = async (req, res) => {
       { isbooked: true },
       { where: { id: seatIds } }
     );
+
+    console.log('finalSeats', finalSeats);
 
     if (finalSeats.length) {
       return res.status(200).json({ data: finalSeats });
