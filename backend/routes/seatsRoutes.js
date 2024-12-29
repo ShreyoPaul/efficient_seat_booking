@@ -6,5 +6,8 @@ const { authenticate } = require('../utils/authenticate');
 router.post('/', authenticate, resetAllSeats)
 router.get('/', authenticate, fetchAllSeats);
 router.post('/book', authenticate, reserveSeatsHandler);
+router.get('/test', (req, res) => {
+    res.send('Hello World');
+});
 
 module.exports = router;
