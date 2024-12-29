@@ -4,7 +4,13 @@ const { PostgresDialect } = require("@sequelize/postgres")
 
 const sequelize = new Sequelize(process.env.SUPABASE_POSTGRESQL_DB_URL, {
   dialect: PostgresDialect,
-  logging: true
+  dialectOptions: {
+    ssl: {
+      require: true, // Ensure SSL is required
+      rejectUnauthorized: false, // Accept self-signed certificates
+    },
+  },
+  logging: false, // Disable logging in production
 })
 
 const connectionDB = async () => {
