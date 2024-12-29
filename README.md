@@ -62,7 +62,7 @@ There are 80 seats in a single coach of a train, with 7 seats in a row and the l
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ShreyoPaul/efficient_seat_booking
    ```
 
 2. Navigate to the frontend folder:
