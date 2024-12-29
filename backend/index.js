@@ -11,6 +11,10 @@ app.use(express.json());
 
 connectionDB();
 
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
 app.use("/api/booking", seatsRoutes);
 app.use("/api/auth", usersRoutes);
 
