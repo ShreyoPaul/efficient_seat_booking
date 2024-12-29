@@ -122,6 +122,3 @@ There are 80 seats in a single coach of a train, with 7 seats in a row and the l
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
