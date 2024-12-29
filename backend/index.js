@@ -10,13 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 connectionDB();
+app.use("/api/booking", seatsRoutes);
+app.use("/api/auth", usersRoutes);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-app.use("/api/booking", seatsRoutes);
-app.use("/api/auth", usersRoutes);
 
 const port = process.env.PORT || 8000;
 
