@@ -1,13 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "env": {
-      "SUPABASE_POSTGRESQL_DB_URL": "postgres://postgres.ctulqovputaoghgxafbl:LSgDd0hae7vKIvYI@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
     }
-  }
-  
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "index.js"
+    }
+  ]
+}
