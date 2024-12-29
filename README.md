@@ -39,9 +39,7 @@ There are 80 seats in a single coach of a train, with 7 seats in a row and the l
 3. Create a `.env` file in the backend folder and configure the following environment variables:
 
    ```plaintext
-   DBNAME=<database_name>
-   USER=<database_user>
-   PASS=<database_password>
+   SUPABASE_POSTGRESQL_DB_URL=<supabase_postgresql_uri>
    JWT=<jwt_secret_key>
    ```
 

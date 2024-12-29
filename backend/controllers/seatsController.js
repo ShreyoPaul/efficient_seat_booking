@@ -14,6 +14,8 @@ const reserveSeatsHandler = async (req, res) => {
       order: [['rownumber', 'ASC'], ['seatnumber', 'ASC']],
     });
 
+
+
     // If not enough seats are available
     if (seats.length < numOfSeats) {
       return res.status(500).json({ message: `Booking failed! only ${seats.length} seats are available!` });
@@ -23,11 +25,13 @@ const reserveSeatsHandler = async (req, res) => {
 
     // Try booking seats in the same row
     for (let row = 1; row <= rowCount; row++) {
-      const rowSeats = seats.filter(seat => seat.rownumber === row);
+      const rowSeats = seats.filter(seat => seat.rownumber === row.toString());
+      console.log(rowSeats);
       if (rowSeats.length >= numOfSeats) {
         const seatsToBook = rowSeats.slice(0, numOfSeats);
         const seatIds = seatsToBook.map(seat => seat.id);
 
+        
         // Bulk update
         await Seat.update(
           { isbooked: true },
@@ -37,7 +41,7 @@ const reserveSeatsHandler = async (req, res) => {
         return res.status(200).json({ data: seatsToBook });
       }
     }
-
+   
     // Book seats in nearby rows if not available in the same row
     const rowSeatCounts = Array.from({ length: rowCount }, (_, i) =>
       seats.filter(seat => seat.rownumber === i + 1).length
