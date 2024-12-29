@@ -6,12 +6,13 @@ const usersRoutes = require("./routes/usersRoutes")
 const cors = require('cors');
 
 const app = express();
+app.use("/api/booking", seatsRoutes);
+app.use("/api/auth", usersRoutes);
+
 app.use(cors());
 app.use(express.json());
 
 connectionDB();
-app.use("/api/booking", seatsRoutes);
-app.use("/api/auth", usersRoutes);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
