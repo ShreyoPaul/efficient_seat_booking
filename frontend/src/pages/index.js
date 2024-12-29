@@ -25,11 +25,13 @@ export default function Home() {
         }
     });
       setData(response.data.availableSeats);
+
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       toast.error("Error fetching data.");
     }
     setLoading(false);
+    return
   };
 
   useEffect(() => {

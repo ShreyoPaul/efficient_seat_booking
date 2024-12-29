@@ -40,14 +40,16 @@ export default function SeatBook({ loading, fetchData }) {
             fetchData();
             if (response.data.data) {
                 setAxiosResponse(response.data.data);
+                toast.success("Booking successful.");
             } else {
                 toast.error(response.data.message);
             }
         } catch (error) {
-            console.error("Error booking seats:", error.response.data.message);
-            toast.error(error.response.data.message);
+            // console.error("Error booking seats:", error.response.data.message);
+            //  toast.error(error.response.data.message);
         }
         setBookingProcessing(false);
+        return
     };
 
     const handelResetBooking = async () => {
@@ -67,10 +69,11 @@ export default function SeatBook({ loading, fetchData }) {
             setAxiosResponse([]);
             toast.success("Booking reset successful.");
         } catch (error) {
-            console.error("Error resetting booking:", error);
-            toast.error(error.response.data.message);
+            // console.error("Error resetting booking:", error);
+            // toast.error(error.response.data.message);
         }
         setResetBookingProcessing(false);
+        return
     };
 
     return (
